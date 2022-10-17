@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity() {
             count--
             tv_count.text = count.toString()
         }
-
+        btn_finish.setOnClickListener{
+            finish()
+        }
         viewModel
     }
 
