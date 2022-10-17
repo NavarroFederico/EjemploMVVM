@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
 
         android:text="0"
-
+        android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_minus"
         app:layout_constraintEnd_toStartOf="@+id/btn_plus"
         app:layout_constraintStart_toEndOf="@+id/btn_minus"
