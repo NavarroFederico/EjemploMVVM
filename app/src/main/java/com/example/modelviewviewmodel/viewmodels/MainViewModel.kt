@@ -1,10 +1,12 @@
 package com.example.modelviewviewmodel.viewmodels
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 /*
 //utilizamos un StateFlow es propio de las corrutinas es propio de Kotlin
@@ -14,18 +16,27 @@ import kotlinx.coroutines.flow.*
 class MainViewModel : ViewModel() {
 
 
-    private var _time = MutableStateFlow<Int>(0)//la diferencia con el LiveData es que nos pide un valor inicial y por lo tanto no va necesitar de un bloque Init
-    val time: StateFlow<Int> = _time
+    private var _count =
+        MutableStateFlow<Int>(0)//la diferencia con el LiveData es que nos pide un valor inicial y por lo tanto no va necesitar de un bloque Init
+    val count: StateFlow<Int> = _count
 
-    init {
-        startTime()
+    private var _event = MutableSharedFlow<Boolean>()
+    val event = _event.asSharedFlow()
+
+
+    fun incrementarValor() {
+        _count.value = _count.value.plus(1)
     }
 
-    private fun startTime() {
-        (60 downTo 0).asFlow().onEach { value ->
-            _time.value = value
-            delay(1000)
-        }.launchIn(viewModelScope) //le indico en que Scope se va a correr
+    fun decrementarValor() {
+        if (_count.value > 0) {
+            _count.value = _count.value.minus(1)
+        } else {
+            viewModelScope.launch {
+                _event.emit(true)
+            }
+        }
+
     }
 
 
