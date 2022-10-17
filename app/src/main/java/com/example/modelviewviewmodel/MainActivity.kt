@@ -36,5 +36,10 @@ class MainActivity : AppCompatActivity() {
         viewModel
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(tag,"On destroy de la actividad")
+
+    }
 
 }
