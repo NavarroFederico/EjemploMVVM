@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     val tag = "ActividadPrincipal"
     private lateinit var binding: ActivityMainBinding
 
-    private var count:Int = 0
+
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -21,19 +21,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(tag,"OnCreate de la actividad")
+
         btn_plus.setOnClickListener{
-            count++
-            tv_count.text = count.toString()
+           viewModel.incrementarValor()
         }
         btn_minus.setOnClickListener{
-            count--
-            tv_count.text = count.toString()
+            viewModel.decrementarValor()
         }
         btn_finish.setOnClickListener{
             finish()
             Log.d(tag,"onFinish de la actividad")
         }
-        viewModel
+//nos permite observar los cambio que ocurran en la variable count de LiveData en ViewModel
+        viewModel.count.observe(this){countValue->
+            tv_count.text=countValue.toString()
+        }
     }
 
     override fun onDestroy() {
