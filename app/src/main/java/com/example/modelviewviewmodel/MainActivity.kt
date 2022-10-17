@@ -21,19 +21,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(tag,"OnCreate de la actividad")
-        btn_plus.setOnClickListener{
-            count++
-            tv_count.text = count.toString()
-        }
-        btn_minus.setOnClickListener{
-            count--
-            tv_count.text = count.toString()
-        }
+
+
+
         btn_finish.setOnClickListener{
             finish()
             Log.d(tag,"onFinish de la actividad")
         }
-        viewModel
+
     }
 
     override fun onDestroy() {
