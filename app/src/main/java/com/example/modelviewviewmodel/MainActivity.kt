@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             viewModel.count.collect { value ->//tiene que colectar
                 binding.tvCount.text = value.toString()
+                Log.d("actividad","estoy${value}")
             }
         }
             lifecycleScope.launchWhenStarted {
